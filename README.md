@@ -2,14 +2,7 @@
 
 ### WHAT IS LOGVIEW?
 
-logview is a sample tool for you to monitor your log files. It allow you specify your own
-
-"error" message via a awk file. Through this way, it is very flexible for you to specify
-
-your "error" message. Also, it can send the "error" message to your ttys or email
-
-according to your choose.
-
+logview is a sample tool for you to monitor your log files. It allow you specify your own "error" message via a awk file. Through this way, it is very flexible for you to specify your "error" message. Also, it can send the "error" message to your ttys or email according to your choose.
 
 ### FEATURES
 
@@ -35,36 +28,34 @@ according to your choose.
 ### INSTALLATION
 
 ```
-git clone https://github.com/alex8866/logview
-cd logview
-
+$ git clone https://github.com/alex8866/logview
+$ cd logview
 ```
 Just cp logview to your $PATH
 
 ### USING LOGVIEW
 
-This is a powerful tool to monitor log files, especially large log files. And it is easy to use, please do not scared by the huge output via `logview -h` or `logview --help`.
+This is a powerful tool to monitor log files, especially large log files. And it is easy to use, please do not scared by the huge output of `logview -h` or `logview --help`.
 
-1. Write your awk file
+#### 1. Write your awk file
 
-This script use a awk file to grep your "error" string, The script use it via 'awk -f $awkfile $logfile'
-
+This script use a awk file to grep your "error" string, the script use it via `awk -f $awkfile $logfile`
 If you do not want to write a awk file, you can use:
-
-`logview -a`
-
+```
+$ logview -a
+```
 to get an example awk file named: awk.example in your current directory, but please remember that awk.example only get the line which contains an "error" or "failed" word. (Not case-sensitive)
 
-2. A very simple logview command line (logview [ OPTIONS ] FILE1 -f FILE2 [ OUTPUT ] ...)
+#### 2. A very simple logview command line (logview [ OPTIONS ] FILE1 -f FILE2 [ OUTPUT ] ...)
 
 ```
-logview awk.example logfile
+$ logview awk.example logfile
 ```
 
-3. Some examples
+#### 3. Some examples
 
 ```
-$logview awk.example -f error.txt -f test.txt --font-color=red --font=bold -s 5s -c ./command -m lkong@redhat.com --mail-time=5m
+$ logview awk.example -f error.txt -f test.txt --font-color=red --font=bold -s 5s -c ./command -m lkong@redhat.com --mail-time=5m
 
 yesyes
 
@@ -74,12 +65,12 @@ yesyes
 
 17:27:50|error.txt|error
 
-$cat command
+$ cat command
 
 echo yesyes
 ```
 
-What does this command mean?
+***What does this command mean?***
 
 -f: specify the log file, so this command monitor two files: error.txt and test.txt
 
@@ -96,10 +87,10 @@ What does this command mean?
 --mail-time=5m: sent the mail every 5 minutes
 
 
-Another example:
+**Another example:**
 
 ```
-$logview awk.example -f error.txt -f test.txt --font-color=red --font=bold -s 5s -c ./command -m lkong@redhat.com --mail-time=5m errorfile.txt --notice=one
+$ logview awk.example -f error.txt -f test.txt --font-color=red --font=bold -s 5s -c ./command -m lkong@redhat.com --mail-time=5m errorfile.txt --notice=one
 
 yesyes
 
@@ -112,7 +103,7 @@ EOF
 yesyes
 ```
 
-What does this command mean?
+***What does this command mean?***
 
 errorfile.txt: Instead of print the "error" messages to the standard output, this command print the "error" message to file errorfile.txt. Note: This will be auto enabled when you provide the second file.
 
@@ -120,35 +111,14 @@ errorfile.txt: Instead of print the "error" messages to the standard output, thi
 
 Notice: When you print the "error" messages to the standard output, the notice function will be auto disabled, even if you specify the --notice option. Because you select to print the "error" messages to the standard output, so you are always noticed by the standard output.
 
-4. Other useful functions
+#### 4. Other useful functions
 There are many powerful functions, you can use:
 
 ```
-logview -h
+$ logview -h
 ```
 
 to get more details
-
-
-
-
-
-
-
-
-
-
-
-
-This command will scan the logfile every 3 seconds and print the  lines which contains a 'error' or 'failed' string to standard output.
-
-
-```
-logview awk.example test.log --scan-time=4s --end-time="20131101 14:49:03" --font-color=green
-```
-
-For more detail, run `logview --help` or `logview -h`
-
 
 ###TODO
 
